@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { UserService } from '../services/user.service';
 
 @Injectable()
-export class LoginGuardGuard implements CanActivate {
+export class RoleGuard implements CanActivate {
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -12,12 +12,14 @@ export class LoginGuardGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
+    const expectedRole = next.data.expectedRole;
+
     let jwtData = this.userService.getToken().split('.')[1];
     let decodedJwtJsonData = window.atob(jwtData);
     let decodedJwtData = JSON.parse(decodedJwtJsonData);
     console.log(decodedJwtData);
 
-    if (this.userService.getUsername() === null) {
+    if (decodedJwtData.role != expectedRole) {
       this.router.navigate(['login']);
       return false;
     }

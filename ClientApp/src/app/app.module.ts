@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -11,12 +11,17 @@ import { CounterComponent } from './components/counter/counter.component';
 import { FetchDataComponent } from './components/fetch-data/fetch-data.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { ErrorComponent } from './components/error/error.component';
 
 import { EqualValidator } from './directives/equal-validator.directive';
-
+ 
 import { UserService } from './services/user.service';
-import { LoginGuardGuard as LoginGuard } from './services/login-guard.guard';
-import { RoleGuardGuard as RoleGuard } from './services/role-guard.guard';
+import { LoginGuard } from './services/login.guard';
+import { RoleGuard } from './services/role.guard';
+import { TokenInterceptor } from './services/token.interceptor';
+
+
 
 @NgModule({
   declarations: [
@@ -27,26 +32,35 @@ import { RoleGuardGuard as RoleGuard } from './services/role-guard.guard';
     FetchDataComponent,
     LoginComponent,
     RegistrationComponent,
-    EqualValidator
+    EqualValidator,
+    AdminComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [LoginGuard] },
+      { path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'counter', component: CounterComponent,
         canActivate: [LoginGuard, RoleGuard],
         data: {
           expectedRole: 'admin'
         } 
       },
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [LoginGuard] },
+      { path: 'fetch-data', component: FetchDataComponent },
       { path: 'login', component: LoginComponent },
       { path: 'registration', component: RegistrationComponent },
+      { path: '**', component: ErrorComponent }
     ])
   ],
-  providers: [UserService, LoginGuard, RoleGuard],
+  providers: [UserService, LoginGuard, RoleGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
