@@ -118,9 +118,7 @@ namespace Spice.Models
 
             modelBuilder.Entity<Process>(entity =>
             {
-                entity.Property(e => e.ProcessId)
-                    .HasColumnName("ProcessID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.ProcessId).HasColumnName("ProcessId");
 
                 entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
