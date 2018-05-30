@@ -1,55 +1,26 @@
 <aside class="sidebar">
   <nav>
     <ul class="sidebar-list">
-      <li class="sidebar-link"><a href="">Chapter 1</a></li>
-      <li class="sidebar-link active">
-        <a href="">Chapter 2</a>
+
+      <li class="sidebar-link" *ngFor="let category of categories"
+          [ngClass]="{'active': checkActive(category)}">
+        <a href="#" (click)="disActivateAll();category.active = true">{{category.Title}}</a>
+
         <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" style="position: fixed; margin-left:194px; margin-top:-44px; height:24px;"
-                data-toggle="collapse" data-target="#collapseExample">
+                data-toggle="collapse" attr.data-target="#collapseCategory{{category.CategoryId}}">
           <span class="sr-only">Toggle Dropdown</span>
         </button>
-        <div class="collapse" id="collapseExample">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+
+        <div class="collapse" id="collapseCategory{{category.CategoryId}}">
+          <ul class="sidebar-list">
+            <li class="sidebar-link2" *ngFor="let process of category.Process"
+                [ngClass]="{'active': process.active}">
+              <a href="#" (click)="disActivateAll();process.active = true">{{process.Title}}</a>
+            </li>
+          </ul>
         </div>
       </li>
-      <li class="sidebar-link">
-        <a href="">Chapter 3</a>
-        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" style="position: fixed; margin-left:194px; margin-top:-44px; height:24px;"
-                data-toggle="collapse" data-target="#collapseExample">
-          <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <div class="collapse" id="collapseExample">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="sidebar-link">
-        <a href="">Chapter 4</a>
-        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" style="position: fixed; margin-left:194px; margin-top:-44px; height:24px;"
-                data-toggle="collapse" data-target="#collapseExample">
-          <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <div class="collapse" id="collapseExample">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="sidebar-link dropdown show">
-        <a href="" >Chapter 5</a>
-        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" style="position: fixed; margin-left:194px; margin-top:-44px; height:24px;"
-                data-toggle="collapse" data-target="#collapseExample">
-          <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <div class="collapse" id="collapseExample">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
+   
     </ul>
   </nav>
 </aside>

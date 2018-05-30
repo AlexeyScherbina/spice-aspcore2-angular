@@ -62,3 +62,26 @@ body {
   .sidebar-link.active {
     border-color: #e35205;
   }
+    .sidebar-link.active > a {
+      background-color: #222;
+    }
+  .sidebar-link:hover {
+    border-color: yellow;
+  }
+
+.sidebar-link2 {
+  color: #ccc;
+  background-color: #333;
+  margin-bottom: 1px;
+}
+  .sidebar-link2 a {
+    display: block;
+    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    text-decoration: none !important;
+    color: red;
+  }
+.sidebar-link2.active > a {
+  background-color: #222;
+}
