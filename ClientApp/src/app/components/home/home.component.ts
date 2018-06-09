@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent {
   public categories: Category[];
-
+  public current = { type: 'dddd' };
   
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     http.get<Category[]>(baseUrl + 'api/Category/getHierarchy').subscribe(result => {
@@ -15,6 +15,7 @@ export class HomeComponent {
       this.disActivateAll();
       console.log(this.categories);
     }, error => console.error(error));
+
   }
 
   public disActivateAll() {

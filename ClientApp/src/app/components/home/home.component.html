@@ -1,10 +1,13 @@
 <aside class="sidebar">
   <nav>
+    <div class="top-div">
+      <a href="#" class="top-link">Log out</a>
+    </div>
     <ul class="sidebar-list">
 
       <li class="sidebar-link" *ngFor="let category of categories"
           [ngClass]="{'active': checkActive(category)}">
-        <a href="#" (click)="disActivateAll();category.active = true">{{category.Title}}</a>
+        <a href="#" (click)="disActivateAll();category.active = true;current=category;current.type='category'">{{category.Title}}</a>
 
         <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" style="position: fixed; margin-left:194px; margin-top:-44px; height:24px;"
                 data-toggle="collapse" attr.data-target="#collapseCategory{{category.CategoryId}}">
@@ -15,7 +18,7 @@
           <ul class="sidebar-list">
             <li class="sidebar-link2" *ngFor="let process of category.Process"
                 [ngClass]="{'active': process.active}">
-              <a href="#" (click)="disActivateAll();process.active = true">{{process.Title}}</a>
+              <a href="#" (click)="disActivateAll();process.active = true;current=process;current.type='process'">{{process.Title}}</a>
             </li>
           </ul>
         </div>
@@ -27,31 +30,63 @@
 
 <section class="main">
 
-  <div class="dropdown show">
-    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Dropdown link
-    </a>
+  <div *ngIf="current.type == 'category'">
+    <h2>{{current.Title}}</h2>
+    <button type="button" class="btn">
+      Estimation
+    </button>
 
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">1</th>
+          <th scope="col">2</th>
+          <th scope="col">3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td><input /></td>
+          <td><input /></td>
+          <td><input /></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td><input /></td>
+          <td><input /></td>
+          <td><input /></td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td><input /></td>
+          <td><input /></td>
+          <td><input /></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <p>{{current.Description}}</p>
   </div>
-  <h2>Chapter 2</h2>
-  <p>Ennui Williamsburg Echo Park pork belly, hella flannel single-origin coffee. Bicycle rights artisan beard Neutra cardigan Echo Park. Shoreditch flannel tote bag pug jean shorts post-ironic semiotics cornhole forage. Skateboard aesthetic synth leggings Banksy. Shabby chic PBR plaid helvetica dreamcatcher tousled, irony ethnic Tonx sustainable before they sold out McSweeney's. Hoodie Banksy freegan bicycle rights, aesthetic try-hard fap ethnic deep v fixie. Before they sold out +1 ugh, Bushwick Wes Anderson cred Marfa synth butcher jean shorts Terry Richardson.</p>
 
-  <p>3 wolf moon blue bottle Truffaut ennui Bushwick, VHS organic skateboard authentic pickled tattooed brunch kogi freegan McSweeney's. Lomo skateboard american apparel, gastropub Schlitz food truck blue bottle. Salvia shoreditch ennui asymmetrical Williamsburg. Cliche umami mumblecore asymmetrical disrupt craft beer, selvage whatever sustainable american apparel YOLO Portland organic. Fashion axe mixtape salvia, Wes Anderson cred food truck DIY. Yr Pinterest Portland Truffaut four loko, semiotics Vice. Authentic lomo bitters, mlkshk raw denim beard narwhal jean shorts cliche tousled PBR.<</p>
+  <div *ngIf="current.type == 'process'">
+    <h2>{{current.Title}}</h2>
+    <button type="button" class="btn">
+      Estimation
+    </button>
+    <p>{{current.Description}}</p><br/>
+    <p>Practices</p>
+    <ul>
+      <li *ngFor="let practice of current.Practice">
+        {{practice.Title}}
+      </li>
+    </ul>
+  </div>
 
-  <p>Wolf irony Schlitz, ethical gastropub disrupt cray. Skateboard High Life viral, try-hard pitchfork pour-over fap next level. High Life butcher meh, Vice single-origin coffee Marfa intelligentsia farm-to-table gentrify occupy cardigan helvetica salvia vegan. Bicycle rights chillwave keytar before they sold out, narwhal Brooklyn mustache. Plaid literally Schlitz Carles, stumptown swag chillwave Echo Park vinyl jean shorts McSweeney's roof party bespoke. Small batch banjo salvia Terry Richardson 3 wolf moon wolf twee hella. Occupy farm-to-table tattooed tousled twee pug.</p>
 
-  <p>Disrupt umami kogi selvage hoodie. YOLO brunch chambray beard,Schlitz intelligentsia Austin. Fanny pack iPhone semiotics Tonx flexitarian, disrupt tote bag hoodie dreamcatcher Portland ugh. Truffaut plaid cardigan, ethnic mustache actually master cleanse Pinterest deep v brunch. Shoreditch kale chips Odd Future typewriter Echo Park, artisan pug pour-over disrupt american apparel wayfarers. DIY semiotics chillwave cardigan gluten-free freegan. Tumblr keffiyeh art party, jean shorts viral put a bird on it irony hella gluten-free whatever cornhole deep v.</p>
-
-  <p>Disrupt umami kogi selvage hoodie. YOLO brunch chambray beard,Schlitz intelligentsia Austin. Fanny pack iPhone semiotics Tonx flexitarian, disrupt tote bag hoodie dreamcatcher Portland ugh. Truffaut plaid cardigan, ethnic mustache actually master cleanse Pinterest deep v brunch. Shoreditch kale chips Odd Future typewriter Echo Park, artisan pug pour-over disrupt american apparel wayfarers. DIY semiotics chillwave cardigan gluten-free freegan. Tumblr keffiyeh art party, jean shorts viral put a bird on it irony hella gluten-free whatever cornhole deep v.</p>
-
-  <p>Disrupt umami kogi selvage hoodie. YOLO brunch chambray beard,Schlitz intelligentsia Austin. Fanny pack iPhone semiotics Tonx flexitarian, disrupt tote bag hoodie dreamcatcher Portland ugh. Truffaut plaid cardigan, ethnic mustache actually master cleanse Pinterest deep v brunch. Shoreditch kale chips Odd Future typewriter Echo Park, artisan pug pour-over disrupt american apparel wayfarers. DIY semiotics chillwave cardigan gluten-free freegan. Tumblr keffiyeh art party, jean shorts viral put a bird on it irony hella gluten-free whatever cornhole deep v.</p>
-
-  <p>Disrupt umami kogi selvage hoodie. YOLO brunch chambray beard, Schlitz intelligentsia Austin. Fanny pack iPhone semiotics Tonx flexitarian, disrupt tote bag hoodie dreamcatcher Portland ugh. Truffaut plaid cardigan, ethnic mustache actually master cleanse Pinterest deep v brunch. Shoreditch kale chips Odd Future typewriter Echo Park, artisan pug pour-over disrupt american apparel wayfarers. DIY semiotics chillwave cardigan gluten-free freegan. Tumblr keffiyeh art party, jean shorts viral put a bird on it irony hella gluten-free whatever cornhole deep v.</p>
 </section>
 <!--<h1>Hello, world!</h1>
 <div>

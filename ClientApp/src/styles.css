@@ -85,3 +85,17 @@ body {
 .sidebar-link2.active > a {
   background-color: #222;
 }
+
+.top-link {
+  border-bottom:1px solid #444;
+  padding: 5px;
+  width:100%;
+  display:inline-block;
+  color:red;
+  text-decoration: none !important;
+}
+.top-div {
+}
+.top-div a:hover{
+  color: yellow !important;
+}
