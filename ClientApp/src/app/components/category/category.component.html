@@ -27,14 +27,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let category of categories; let i = index">
+      <tr *ngFor="let process of category.Process; let i = index">
         <th scope="row">{{i+1}}</th>
-        <td><input [(ngModel)]="category.Title" /></td>
-        <td><input [(ngModel)]="category.Description" /></td>
+        <td><input [(ngModel)]="process.Title" /></td>
+        <td><input [(ngModel)]="process.Description" /></td>
         <td>
           <button class="btn">Update</button>
           <button class="btn">Delete</button>
-          <a [routerLink]="['/category', category.CategoryId]" class="btn">Processes</a>
+          <a [routerLink]="['/process', process.ProcessId]" class="btn">Practices</a>
         </td>
       </tr>
     </tbody>

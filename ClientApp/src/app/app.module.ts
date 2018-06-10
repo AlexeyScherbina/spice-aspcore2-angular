@@ -13,6 +13,10 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ErrorComponent } from './components/error/error.component';
+import { CategoryComponent } from './components/category/category.component';
+import { ProcessComponent } from './components/process/process.component';
+import { PracticeComponent } from './components/practice/practice.component';
+import { EstimationComponent } from './components/estimation/estimation.component';
 
 import { EqualValidator } from './directives/equal-validator.directive';
  
@@ -20,6 +24,7 @@ import { UserService } from './services/user.service';
 import { LoginGuard } from './services/login.guard';
 import { RoleGuard } from './services/role.guard';
 import { TokenInterceptor } from './services/token.interceptor';
+
 
 
 
@@ -34,7 +39,11 @@ import { TokenInterceptor } from './services/token.interceptor';
     RegistrationComponent,
     EqualValidator,
     AdminComponent,
-    ErrorComponent
+    ErrorComponent,
+    CategoryComponent,
+    ProcessComponent,
+    PracticeComponent,
+    EstimationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -48,9 +57,13 @@ import { TokenInterceptor } from './services/token.interceptor';
           expectedRole: 'admin'
         } 
       },
+      { path: 'admin', component: AdminComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'login', component: LoginComponent },
       { path: 'registration', component: RegistrationComponent },
+      { path: 'category/:cid', component: CategoryComponent },
+      { path: 'process/:pid', component: ProcessComponent },
+      { path: 'estmation', component: EstimationComponent },
       { path: '**', component: ErrorComponent }
     ])
   ],
