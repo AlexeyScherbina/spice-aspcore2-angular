@@ -12,43 +12,31 @@ namespace Spice.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    public class CategoryController : Controller
+    public class ProcessController : Controller
     {
 
         private SpiceDBContext _context;
 
 
-        public CategoryController(SpiceDBContext context)
+        public ProcessController(SpiceDBContext context)
         {
             _context = context;
         }
 
-        [HttpGet("[action]")]
-        public async Task GetHierarchy()
-        {
-            var cats = _context.Category
-                .Include(proc => proc.Process)
-                .ThenInclude(prac => prac.Practice)
-                .ToList();
-            var response = cats;
-
-            // сериализация ответа
-            Response.ContentType = "application/json";
-            await Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented, ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-        }
 
         [HttpPost("[action]")]
-        public async Task Add([FromBody] Category model)
+        public async Task Add([FromBody] Process model)
         {
 
-            Category c = new Category()
+            Process c = new Process()
             {
                 Title = model.Title,
-                Description = model.Description
+                Description = model.Description,
+                CategoryId = (int)model.CategoryId
             };
-            
-            _context.Category.Add(c);
-            await _context.SaveChangesAsync();
+
+            var dd = _context.Process.Add(c);
+            var ddd = await _context.SaveChangesAsync();
             var response = "success";
 
             // сериализация ответа
@@ -57,9 +45,9 @@ namespace Spice.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task Update([FromBody] Category model)
+        public async Task Update([FromBody] Process model)
         {
-            var catToUpdate = await _context.Category.SingleOrDefaultAsync(c => c.CategoryId == model.CategoryId);
+            var catToUpdate = await _context.Process.SingleOrDefaultAsync(c => c.ProcessId == model.ProcessId);
 
             catToUpdate.Title = model.Title;
             catToUpdate.Description = model.Description;
@@ -76,11 +64,11 @@ namespace Spice.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task Delete([FromBody] Category model)
+        public async Task Delete([FromBody] Process model)
         {
-            var catToDelete = await _context.Category.SingleOrDefaultAsync(c => c.CategoryId == model.CategoryId);
+            var catToDelete = await _context.Process.SingleOrDefaultAsync(c => c.ProcessId == model.ProcessId);
 
-            var response = _context.Category.Remove(catToDelete);
+            var response = _context.Process.Remove(catToDelete);
             await _context.SaveChangesAsync();
             // сериализация ответа
             Response.ContentType = "application/json";

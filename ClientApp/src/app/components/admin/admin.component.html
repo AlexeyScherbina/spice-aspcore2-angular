@@ -8,7 +8,7 @@
       <li class="sidebar-link">
         <a href="#">Categories</a>
         <a href="#">Processes</a>
-        <a href="#">Estimation</a>
+        <a [routerLink]="['/estimation']">Assessment</a>
       </li>
 
     </ul>
@@ -30,15 +30,15 @@
       <tr *ngFor="let category of categories; let i = index">
         <th scope="row">{{i+1}}</th>
         <td><input [(ngModel)]="category.Title" /></td>
-        <td><input [(ngModel)]="category.Description" /></td>
+        <td><textarea  [(ngModel)]="category.Description" type="text" style="height:100px;" ></textarea></td>
         <td>
-          <button class="btn">Update</button>
+          <button class="btn" (click)="addCategory(category)">Update</button>
           <button class="btn">Delete</button>
           <a [routerLink]="['/category', category.CategoryId]" class="btn">Processes</a>
         </td>
       </tr>
     </tbody>
   </table>
-  <button class="btn">Add</button>
+  <button class="btn" (click)="addRow()">Add</button>
 
 </section>

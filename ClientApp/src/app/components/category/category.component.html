@@ -8,7 +8,7 @@
       <li class="sidebar-link">
         <a href="#">Categories</a>
         <a href="#">Processes</a>
-        <a href="#">Estimation</a>
+        <a href="#">Assessment</a>
       </li>
 
     </ul>
@@ -32,13 +32,13 @@
         <td><input [(ngModel)]="process.Title" /></td>
         <td><input [(ngModel)]="process.Description" /></td>
         <td>
-          <button class="btn">Update</button>
+          <button class="btn" (click)="addProcess(process)">Update</button>
           <button class="btn">Delete</button>
           <a [routerLink]="['/process', process.ProcessId]" class="btn">Practices</a>
         </td>
       </tr>
     </tbody>
   </table>
-  <button class="btn">Add</button>
+  <button class="btn" (click)="addRow()">Add</button>
 
 </section>

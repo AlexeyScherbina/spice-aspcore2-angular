@@ -63,7 +63,7 @@ import { TokenInterceptor } from './services/token.interceptor';
       { path: 'registration', component: RegistrationComponent },
       { path: 'category/:cid', component: CategoryComponent },
       { path: 'process/:pid', component: ProcessComponent },
-      { path: 'estmation', component: EstimationComponent },
+      { path: 'estimation', component: EstimationComponent },
       { path: '**', component: ErrorComponent }
     ])
   ],
